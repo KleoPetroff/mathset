@@ -1,0 +1,31 @@
+{
+  "name": "mathset",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel src -d dist",
+    "watch": "watch \"npm run build\" ./src",
+    "test": "mocha ./tests --recursive --compilers js:babel-core/register",
+    "test:watch": "mocha ./tests --recursive --compilers js:babel-core/register -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KleoPetroff/mathset.git"
+  },
+  "author": "Kliment Petrov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/KleoPetroff/mathset/issues"
+  },
+  "homepage": "https://github.com/KleoPetroff/mathset#readme",
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-cli": "^6.24.1",
+    "babel-preset-env": "^1.4.0",
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0",
+    "watch": "^1.0.2"
+  }
+}
