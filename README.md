@@ -12,7 +12,7 @@ Small library implementing mathematical sets.
 
 WIP
 
-###Set theory
+### Set theory
 
 WIP
 
