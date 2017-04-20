@@ -134,12 +134,31 @@ describe('mathset', () => {
       expect(mathset.difference([1, 2, 3, 4])).to.be.an('array');
     });
 
-    it('should return the difference of two sets', () => {
+    it('should return the difference of set A from set B', () => {
       expect(mathset.difference([1, 2, 3, 4])).to.deep.equal([5, 6]);
     });
 
     it('should return empty array if no differences are found', () => {
       expect(mathset.difference([1, 2, 3, 5, 6])).to.deep.equal([]);
     })
+  });
+
+  describe('Symmetric Difference', () => {
+    it('should exist', () => {
+      expect(mathset.symDifference).to.exist;
+      expect(mathset.symDifference).to.be.a('function');
+    });
+
+    it('should return an array', () => {
+      expect(mathset.symDifference([1, 2, 3])).to.be.an('array');
+    });
+
+    it('should return the symmetric difference of two sets', () => {
+      expect(mathset.symDifference([1, 2, 3, 4])).to.deep.equal([5, 6, 4]);
+    });
+
+    it('should return empty array if no symmetric differences are found', () => {
+      expect(mathset.symDifference([1, 2, 3, 5, 6])).to.deep.equal([]);
+    });
   });
 });

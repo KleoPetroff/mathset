@@ -47,4 +47,11 @@ export default class MathSet {
     const uniqueSet = [...new Set(set)];
     return this.set.filter((member) => uniqueSet.indexOf(member) === -1);
   }
+
+  symDifference(set) {
+    const uniqueSet = [...new Set(set)];
+    const setADiff = this.set.filter(member => uniqueSet.indexOf(member) === -1);
+    const setBDiff = uniqueSet.filter(member => this.set.indexOf(member) === -1);
+    return [].concat(setADiff, setBDiff);
+  }
 }
