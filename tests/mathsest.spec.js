@@ -110,6 +110,11 @@ describe('mathset', () => {
       expect(mathset.insertion([1, 2, 3])).to.be.a('array');
     });
 
+    it('should return an array even if no duplicates are found', () => {
+      expect(mathset.insertion([11, 22, 33])).to.be.a('array');
+      expect(mathset.insertion([11, 22, 33])).to.deep.equal([]);
+    });
+
     it('should return the members in both sets', () => {
       expect(mathset.insertion([1, 2, 3, 12, 42])).to.deep.equal([1, 2, 3]);
     });
@@ -117,5 +122,24 @@ describe('mathset', () => {
     it('should not have duplicated', () => {
       expect(mathset.insertion([1, 1, 2, 12, 42])).to.deep.equal([1, 2]);
     });
+  });
+
+  describe('difference', () => {
+    it('should exist', () => {
+      expect(mathset.difference).to.exist;
+      expect(mathset.difference).to.be.a('function');
+    });
+
+    it('should return an array', () => {
+      expect(mathset.difference([1, 2, 3, 4])).to.be.an('array');
+    });
+
+    it('should return the difference of two sets', () => {
+      expect(mathset.difference([1, 2, 3, 4])).to.deep.equal([5, 6]);
+    });
+
+    it('should return empty array if no differences are found', () => {
+      expect(mathset.difference([1, 2, 3, 5, 6])).to.deep.equal([]);
+    })
   });
 });

@@ -36,10 +36,15 @@ export default class MathSet {
   union(set) {
     const concatenated = this.set.concat(set);
     return [...new Set(concatenated)];
-  };
+  }
 
   insertion(set) {
     const uniqueSet = [...new Set(set)];
     return this.set.filter((member) => uniqueSet.indexOf(member) !== -1);
+  }
+
+  difference(set) {
+    const uniqueSet = [...new Set(set)];
+    return this.set.filter((member) => uniqueSet.indexOf(member) === -1);
   }
 }
