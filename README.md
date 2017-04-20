@@ -36,4 +36,38 @@ The sets are created in the form of arrays. They represent a sequence of element
 
 ## API
 
-WIP
+#### `new MathSet(<array>)`
+
+create a new instance of MathSet.
+
+#### `MathSet.prototype.isEmpty(<array | MathSet>)`
+
+Checks if the set has any members or is empty. Returns `true` or `false`.
+
+#### `MathSet.prototype.equal(<array | MathSet>)`
+
+Checks whether the set is equal to a set. The order in which elements are listed does not matter. Returns `true` of `false`.
+
+#### `MathSet.prototype.subset(<array | MathSet>)`
+
+Checks if all the elements of the set are also elements of a new set. Returns `true` or `false`.
+
+#### `MathSet.prototype.union(<array | MathSet>)`
+
+Returns a new set of all objects that are a member of the set, the set passed or both.
+
+#### `MathSet.prototype.insertion(<array | MathSet>)`
+
+Returns a new set of all objects that are members of both the set and the passed set.
+
+#### `MathSet.prototype.difference(<array | MathSet>)`
+
+Returns a new set of all members of the set, that are not members of the passed set.
+
+#### `MathSet.prototype.symDifference(<array | MathSet>)`
+
+Returns a new set of all objects that are a member of exactly one of the set or the set passed (elements which are in one of the sets, but not in both).
+
+#### `MathSet.prototype.cartesianProduct(<array | MathSet>)`
+
+Returns a new set of all possible ordered pairs (_a_, _b_), where _a_ is a member of the set, and _b_ is a member of the passed set.
