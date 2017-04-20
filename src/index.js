@@ -9,7 +9,8 @@ function checkSet(set) {
 
 export default class MathSet {
   constructor(set = []) {
-    this.set = set.length ? [...new Set(set)] : [];
+    if (!Array.isArray(set)) throw new TypeError(`Expected property to be array, instead found ${typeof set}.`);
+    this.set = set.length ? [...new Set(set)] : set;
   }
 
   isEmpty() {
