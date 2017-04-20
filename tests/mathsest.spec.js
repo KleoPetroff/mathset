@@ -98,15 +98,17 @@ describe('mathset', () => {
     });
 
     it('should return array', () => {
-      expect(mathset.union([1, 2, 4])).to.be.a('array');
+      expect(mathset.union([1, 2, 4])).to.be.instanceof(MathSet);
     });
 
     it('should concatenate two sets', () => {
-      expect(mathset.union([1, 2, 3, 4, 5, 7, 8])).to.deep.equal([1, 2, 3, 5, 6, 4, 7, 8]);
+      const expected = new MathSet([1, 2, 3, 5, 6, 4, 7, 8]);
+      expect(mathset.union([1, 2, 3, 4, 5, 7, 8])).to.deep.equal(expected);
     });
 
     it('should not have duplicates', () => {
-      expect(mathset.union([1, 2, 3, 5, 6])).to.deep.equal([1, 2, 3, 5, 6]);
+      const expected = new MathSet([1, 2, 3, 5, 6]);
+      expect(mathset.union([1, 2, 3, 5, 6])).to.deep.equal(expected);
     });
   });
 
@@ -116,21 +118,26 @@ describe('mathset', () => {
       expect(mathset.insertion).to.be.a('function');
     });
 
-    it('should return array', () => {
-      expect(mathset.insertion([1, 2, 3])).to.be.a('array');
+    it('should return a new set instance', () => {
+      expect(mathset.insertion([1, 2, 3])).to.be.instanceof(MathSet);
     });
 
-    it('should return an array even if no duplicates are found', () => {
-      expect(mathset.insertion([11, 22, 33])).to.be.a('array');
-      expect(mathset.insertion([11, 22, 33])).to.deep.equal([]);
+    it('should return a new set even if no duplicates are found', () => {
+      expect(mathset.insertion([11, 22, 33])).to.be.instanceof(MathSet);
+      expect(mathset.insertion([11, 22, 33])).to.deep.equal(new MathSet([]));
     });
 
-    it('should return the members in both sets', () => {
-      expect(mathset.insertion([1, 2, 3, 12, 42])).to.deep.equal([1, 2, 3]);
+    it('should return a new set with the members in both sets', () => {
+      expect(mathset.insertion([1, 2, 3, 12, 42])).to.deep.equal(new MathSet([1, 2, 3]));
     });
 
     it('should not have duplicated', () => {
-      expect(mathset.insertion([1, 1, 2, 12, 42])).to.deep.equal([1, 2]);
+      expect(mathset.insertion([1, 1, 2, 12, 42])).to.deep.equal(new MathSet([1, 2]));
+    });
+
+    it('should return a new set of all members of two sets', () => {
+      const newSet = new MathSet([1, 3, 7, 8]);
+      expect(mathset.insertion(newSet)).to.deep.equal(new MathSet([1, 3]));
     });
   });
 
@@ -140,17 +147,17 @@ describe('mathset', () => {
       expect(mathset.difference).to.be.a('function');
     });
 
-    it('should return an array', () => {
-      expect(mathset.difference([1, 2, 3, 4])).to.be.an('array');
+    it('should return a new set', () => {
+      expect(mathset.difference([1, 2, 3, 4])).to.be.instanceof(MathSet);
     });
 
     it('should return the difference of set A from set B', () => {
-      expect(mathset.difference([1, 2, 3, 4])).to.deep.equal([5, 6]);
+      expect(mathset.difference(new MathSet([1, 2, 3, 4]))).to.deep.equal(new MathSet([5, 6]));
     });
 
     it('should return empty array if no differences are found', () => {
-      expect(mathset.difference([1, 2, 3, 5, 6])).to.deep.equal([]);
-    })
+      expect(mathset.difference([1, 2, 3, 5, 6])).to.deep.equal(new MathSet());
+    });
   });
 
   describe('Symmetric Difference', () => {
@@ -159,16 +166,16 @@ describe('mathset', () => {
       expect(mathset.symDifference).to.be.a('function');
     });
 
-    it('should return an array', () => {
-      expect(mathset.symDifference([1, 2, 3])).to.be.an('array');
+    it('should return a new set', () => {
+      expect(mathset.symDifference([1, 2, 3])).to.be.instanceof(MathSet);
     });
 
     it('should return the symmetric difference of two sets', () => {
-      expect(mathset.symDifference([1, 2, 3, 4])).to.deep.equal([5, 6, 4]);
+      expect(mathset.symDifference(new MathSet([1, 2, 3, 4]))).to.deep.equal(new MathSet([5, 6, 4]));
     });
 
     it('should return empty array if no symmetric differences are found', () => {
-      expect(mathset.symDifference([1, 2, 3, 5, 6])).to.deep.equal([]);
+      expect(mathset.symDifference([1, 2, 3, 5, 6])).to.deep.equal(new MathSet());
     });
   });
 
@@ -183,45 +190,39 @@ describe('mathset', () => {
     });
 
     it('should return a new MathSet object with all possible ordered pairs', () => {
-      const expected = {
-        set: [
-          [1, 'red'], [1, 'blue'],
-          [2, 'red'], [2, 'blue'],
-          [3, 'red'], [3, 'blue'],
-          [5, 'red'], [5, 'blue'],
-          [6, 'red'], [6, 'blue'],
-        ]
-      };
+      const expected = new MathSet([
+        [1, 'red'], [1, 'blue'],
+        [2, 'red'], [2, 'blue'],
+        [3, 'red'], [3, 'blue'],
+        [5, 'red'], [5, 'blue'],
+        [6, 'red'], [6, 'blue'],
+      ]);
 
-      expect(mathset.cartesianProduct(['red', 'blue'])).to.deep.equal(expected);
+      expect(mathset.cartesianProduct(new MathSet(['red', 'blue']))).to.deep.equal(expected);
     });
 
     it('should return a new MathSet object with all possible pairs - numbers', () => {
-      const expected = {
-        set: [
-          [1, 8], [1, 9],
-          [2, 8], [2, 9],
-          [3, 8], [3, 9],
-          [5, 8], [5, 9],
-          [6, 8], [6, 9],
-        ]
-      };
+      const expected = new MathSet([
+        [1, 8], [1, 9],
+        [2, 8], [2, 9],
+        [3, 8], [3, 9],
+        [5, 8], [5, 9],
+        [6, 8], [6, 9],
+      ]);
 
-      expect(mathset.cartesianProduct([8, 9])).to.deep.equal(expected);
+      expect(mathset.cartesianProduct(new MathSet([8, 9]))).to.deep.equal(expected);
     });
 
     it('should return a new MathSet object with all possible pairs - more that 2 elements', () => {
-      const expected = {
-        set : [
-          [1, 8], [1, 9], [1, 10],
-          [2, 8], [2, 9], [2, 10],
-          [3, 8], [3, 9], [3, 10],
-          [5, 8], [5, 9], [5, 10],
-          [6, 8], [6, 9], [6, 10],
-        ]
-      }
+      const expected = new MathSet([
+        [1, 8], [1, 9], [1, 10],
+        [2, 8], [2, 9], [2, 10],
+        [3, 8], [3, 9], [3, 10],
+        [5, 8], [5, 9], [5, 10],
+        [6, 8], [6, 9], [6, 10],
+      ]);
 
-      expect(mathset.cartesianProduct([8, 9, 10])).to.deep.equal(expected);
+      expect(mathset.cartesianProduct(new MathSet([8, 9, 10]))).to.deep.equal(expected);
     });
   });
 });
