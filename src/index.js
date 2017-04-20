@@ -17,8 +17,10 @@ export default class MathSet {
   }
 
   equal(set) {
-    const orderedLocalSet = [...new Set(this.set)].sort();
-    const orderedParamSet = [...new Set(set)].sort();
+    const setArray = checkSet(set);
+
+    const orderedLocalSet = this.set.sort();
+    const orderedParamSet = [...new Set(setArray)].sort();
 
     for (let i = orderedLocalSet.length; i--;) {
       if (orderedLocalSet[i] !== orderedParamSet[i]) return false;

@@ -24,15 +24,15 @@ describe('mathset', () => {
     });
 
     it('should return true if two sets are equal', () => {
-      expect(mathset.equal([1, 2, 3, 5, 6])).to.be.true;
+      expect(mathset.equal(new MathSet([1, 2, 3, 5, 6]))).to.be.true;
     });
 
     it('should return false if the sets have different members', () => {
-      expect(mathset.equal([1, 2, 5, 6, 8])).to.be.false;
+      expect(mathset.equal(new MathSet([1, 2, 5, 6, 8]))).to.be.false;
     });
 
     it('should return true if the set has duplicate members', () => {
-      expect(mathset.equal([1, 2, 3, 5, 6, 2, 5, 5])).to.be.true;
+      expect(mathset.equal(new MathSet([1, 2, 3, 5, 6, 2, 5, 5]))).to.be.true;
     });
 
     it('should return true regardless of order', () => {
