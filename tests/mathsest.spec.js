@@ -14,6 +14,15 @@ describe('mathset', () => {
     expect(newMathSet.set).to.deep.equal([1, 2, 3, 5, 6]);
   });
 
+  it('should throw if other types are passed', () => {
+    expect(() => new MathSet({})).to.throw('Expected property to be array, instead found object.');
+    expect(() => new MathSet(42)).to.throw('Expected property to be array, instead found number.');
+    expect(() => new MathSet(function() {})).to.throw('Expected property to be array, instead found function.');
+    expect(() => new MathSet(true)).to.throw('Expected property to be array, instead found boolean.');
+    expect(() => new MathSet('heey')).to.throw('Expected property to be array, instead found string.');
+    expect(() => new MathSet(new String('hey'))).to.throw('Expected property to be array, instead found object.');
+  })
+
   describe('equal', () => {
     it('mathset should exist', () => {
       expect(MathSet).to.exist;
