@@ -99,4 +99,23 @@ describe('mathset', () => {
       expect(mathset.union([1, 2, 3, 5, 6])).to.deep.equal([1, 2, 3, 5, 6]);
     });
   });
+
+  describe('insertion', () => {
+    it('should exist', () => {
+      expect(mathset.insertion).to.exist;
+      expect(mathset.insertion).to.be.a('function');
+    });
+
+    it('should return array', () => {
+      expect(mathset.insertion([1, 2, 3])).to.be.a('array');
+    });
+
+    it('should return the members in both sets', () => {
+      expect(mathset.insertion([1, 2, 3, 12, 42])).to.deep.equal([1, 2, 3]);
+    });
+
+    it('should not have duplicated', () => {
+      expect(mathset.insertion([1, 1, 2, 12, 42])).to.deep.equal([1, 2]);
+    });
+  });
 });

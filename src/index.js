@@ -37,4 +37,9 @@ export default class MathSet {
     const concatenated = this.set.concat(set);
     return [...new Set(concatenated)];
   };
+
+  insertion(set) {
+    const uniqueSet = [...new Set(set)];
+    return this.set.filter((member) => uniqueSet.indexOf(member) !== -1);
+  }
 }
