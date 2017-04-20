@@ -9,6 +9,11 @@ describe('mathset', () => {
     mathset = new MathSet([1, 2, 3, 5, 6]);
   });
 
+  it('should not have duplicates', () => {
+    const newMathSet = new MathSet([1, 2, 3, 3, 2, 1, 5, 6, 6]);
+    expect(newMathSet.set).to.deep.equal([1, 2, 3, 5, 6]);
+  });
+
   describe('equal', () => {
     it('mathset should exist', () => {
       expect(MathSet).to.exist;
@@ -16,7 +21,7 @@ describe('mathset', () => {
 
     it('should have a equal method', () => {
       expect(mathset.equal).to.exist;
-    })
+    });
 
     it('should return true if two sets are equal', () => {
       expect(mathset.equal([1, 2, 3, 5, 6])).to.be.true;
@@ -46,6 +51,11 @@ describe('mathset', () => {
 
     it('should return true if the set is empty', () => {
       const newMathSet = new MathSet();
+      expect(newMathSet.isEmpty()).to.be.true;
+    });
+
+    it('should return true if the set has no members - empty array', () => {
+      const newMathSet = new MathSet([]);
       expect(newMathSet.isEmpty()).to.be.true;
     });
 
@@ -159,6 +169,59 @@ describe('mathset', () => {
 
     it('should return empty array if no symmetric differences are found', () => {
       expect(mathset.symDifference([1, 2, 3, 5, 6])).to.deep.equal([]);
+    });
+  });
+
+  describe('cartesian product', () => {
+    it('should exist', () => {
+      expect(mathset.cartesianProduct).to.exist;
+      expect(mathset.cartesianProduct).to.be.a('function');
+    });
+
+    it('should return a new set', () => {
+      expect(mathset.cartesianProduct([7, 8])).to.be.an.instanceof(MathSet);
+    });
+
+    it('should return a new MathSet object with all possible ordered pairs', () => {
+      const expected = {
+        set: [
+          [1, 'red'], [1, 'blue'],
+          [2, 'red'], [2, 'blue'],
+          [3, 'red'], [3, 'blue'],
+          [5, 'red'], [5, 'blue'],
+          [6, 'red'], [6, 'blue'],
+        ]
+      };
+
+      expect(mathset.cartesianProduct(['red', 'blue'])).to.deep.equal(expected);
+    });
+
+    it('should return a new MathSet object with all possible pairs - numbers', () => {
+      const expected = {
+        set: [
+          [1, 8], [1, 9],
+          [2, 8], [2, 9],
+          [3, 8], [3, 9],
+          [5, 8], [5, 9],
+          [6, 8], [6, 9],
+        ]
+      };
+
+      expect(mathset.cartesianProduct([8, 9])).to.deep.equal(expected);
+    });
+
+    it('should return a new MathSet object with all possible pairs - more that 2 elements', () => {
+      const expected = {
+        set : [
+          [1, 8], [1, 9], [1, 10],
+          [2, 8], [2, 9], [2, 10],
+          [3, 8], [3, 9], [3, 10],
+          [5, 8], [5, 9], [5, 10],
+          [6, 8], [6, 9], [6, 10],
+        ]
+      }
+
+      expect(mathset.cartesianProduct([8, 9, 10])).to.deep.equal(expected);
     });
   });
 });
