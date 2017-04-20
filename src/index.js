@@ -1,6 +1,6 @@
 export default class MathSet {
-  constructor(set) {
-    this.set = set || [];
+  constructor(set = []) {
+    this.set = set.length ? [...new Set(set)] : [];
   }
 
   isEmpty() {
@@ -53,5 +53,15 @@ export default class MathSet {
     const setADiff = this.set.filter(member => uniqueSet.indexOf(member) === -1);
     const setBDiff = uniqueSet.filter(member => this.set.indexOf(member) === -1);
     return [].concat(setADiff, setBDiff);
+  }
+
+  cartesianProduct(set) {
+    const uniqueSet = [...new Set(set)];
+
+    const product = this.set
+      .map(member => uniqueSet.map(setMember => [member, setMember]))
+      .reduce((acc, array) => acc.concat(array));
+
+    return new MathSet(product);
   }
 }
